@@ -17,5 +17,17 @@
       <a .link target="_blank" href=#{"d.href"}>#{"d.href"}
       <span .pull-right .badge>#{"d.votetotal"}
 <script>
+  urlsCallbacks.push(function(urls) {
+    d3.selectAll('#urls button.btn-success').on('click', function() {
+      \$.ajax({url: "/vote/" + this.__data__.id + "/up", type: 'POST', success: function(result){
+          updateurls(result);
+      }});
+    });
+    d3.selectAll('#urls button.btn-danger').on('click', function() {
+      \$.ajax({url: "/vote/" + this.__data__.id + "/down", type: 'POST', success: function(result){
+          updateurls(result);
+      }});
+    });
+  });
   urlsCallbacks.push(function(urls) { console.log(urls); });
 #{d3Pull "/" "urls"}

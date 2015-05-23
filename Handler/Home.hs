@@ -37,7 +37,8 @@ jsonUrls (url:urls) votes = jsonUrl url votes : jsonUrls urls votes
 
 jsonUrl :: Entity Url -> [Vote] -> Value
 jsonUrl url votes = object
-    [ "href"         .= urlHref (entityVal url)
+    [ "id"           .= entityKey url
+    , "href"         .= urlHref (entityVal url)
     , "votetotal"    .= urlVotetotal (entityVal url)
     , "alreadyVoted" .= case find (\v -> (voteUrlId v) == (entityKey url)) votes of
                         Just _  -> True
@@ -58,6 +59,26 @@ postHomeR = do
             redirect HomeR
         _               -> return ()
     redirect HomeR
+
+postVoteUpR :: UrlId -> Handler Value
+postVoteUpR urlId = runDB $ do
+    ip <- fmap (show . remoteHost . reqWaiRequest) getRequest
+    let ipp = removeIp ip
+    update urlId [UrlVotetotal +=. 1]
+    _ <- insert $ Vote urlId ipp
+    urls <- selectList [] [Desc UrlVotetotal]
+    votes <- selectList [VoteIp ==. ipp] [Asc VoteUrlId]
+    return $ object [ "urls" .= jsonUrls urls (map entityVal votes) ]
+
+postVoteDownR :: UrlId -> Handler Value
+postVoteDownR urlId = runDB $ do
+    ip <- fmap (show . remoteHost . reqWaiRequest) getRequest
+    let ipp = removeIp ip
+    update urlId [UrlVotetotal -=. 1]
+    _ <- insert $ Vote urlId ipp
+    urls <- selectList [] [Desc UrlVotetotal]
+    votes <- selectList [VoteIp ==. ipp] [Asc VoteUrlId]
+    return $ object [ "urls" .= jsonUrls urls (map entityVal votes) ]
 
 removeIp :: String -> Text
 removeIp ipp = L.head $ splitOn ":" $ pack ipp
