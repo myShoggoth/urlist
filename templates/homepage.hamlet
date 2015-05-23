@@ -1,0 +1,21 @@
+#{d3InitData "urls"}
+<.container>
+  <.center-block>
+    <form method=post action=@{HomeR}#form enctype=#{formEnctype}>
+      ^{formWidget}
+      <button .btn .btn-primary type="submit">
+        Submit
+        <span .glyphicon .glyphicon-upload>
+<#urls .container d3-select="#urls" d3-callback="urls" d3-selectAll=".urllisting" d3-data="data.urls">
+  <.urllisting .col-sm-6 .col-md-4>
+    <.well .well-sm>
+      <.btn-group>
+        <button type="button" disabled=#{"d.alreadyVoted ? \"disabled\" : null"} .btn .btn-success .btn-sm>
+          <span .glyphicon .glyphicon-triangle-top>
+        <button type="button" disabled=#{"d.alreadyVoted ? \"disabled\" : null"} .btn .btn-danger .btn-sm>
+          <span .glyphicon .glyphicon-triangle-bottom>
+      <a .link target="_blank" href=#{"d.href"}>#{"d.href"}
+      <span .pull-right .badge>#{"d.votetotal"}
+<script>
+  urlsCallbacks.push(function(urls) { console.log(urls); });
+#{d3Pull "/" "urls"}
