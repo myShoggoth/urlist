@@ -1,11 +1,19 @@
 #{d3InitData "urls"}
-<.container>
-  <.center-block>
-    <form method=post action=@{HomeR}#form enctype=#{formEnctype}>
-      ^{formWidget}
-      <button .btn .btn-primary type="submit">
-        Submit
-        <span .glyphicon .glyphicon-upload>
+<.navbar .navbar-default .navbar-static-top role="navigation">
+  <.container-fluid>
+    <.navbar-header>
+      <button .navbar-toggle data-target=".navbar-collapse" data-toggle="collapse" type="button">
+        <span .sr-only>Toggle navigation
+        <span .icon-bar>
+        <span .icon-bar>
+        <span .icon-bar>
+      <a .navbar-brand href="/">Urlist
+      <form method=post .navbar-form .navbar-right action=@{HomeR}#form enctype=#{formEnctype}>
+        ^{formWidget}
+        <button .btn .btn-primary type="submit">
+          Add
+          <span .glyphicon .glyphicon-upload>
+
 <#urls .container d3-select="#urls" d3-callback="urls" d3-selectAll=".urllisting" d3-data="data.urls">
   <.urllisting .col-sm-6 .col-md-4>
     <.well .well-sm>
