@@ -14,7 +14,7 @@
           Add
           <span .glyphicon .glyphicon-upload>
 
-<#urls .container d3-select="#urls" d3-callback="urls" d3-selectAll=".urllisting" d3-data="data.urls">
+<#urls .container d3-select="#urls" d3-callback="urls" d3-selectAll=".urllisting" d3-data="data.urls, function(d){return d.id}">
   <.urllisting .col-sm-6 .col-md-4>
     <.well .well-sm>
       <.btn-group>
