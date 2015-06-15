@@ -1,0 +1,11 @@
+flags:
+  urlist:
+    library-only: false
+    dev: false
+packages:
+- '.'
+- location:
+    git: https://github.com/myShoggoth/shakespeare.git
+    commit: e0158a40e29edfdacc5a1bc9fa2b0fce98e66d8e
+extra-deps: []
+resolver: lts-2.14
