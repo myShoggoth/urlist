@@ -14,7 +14,7 @@
           Add
           <span .glyphicon .glyphicon-upload>
 
-<#urls .container d3-select="#urls" d3-callback="urls" d3-selectAll=".urllisting" d3-data="data.urls, function(d){return d.id}">
+<#urls .container d3-select="#urls" d3-callback="urls" d3-selectAll=".urllisting" d3-data="urls.urls, function(d){return d.id}">
   <.urllisting .col-sm-6 .col-md-4>
     <.well .well-sm>
       <.btn-group>
@@ -28,14 +28,13 @@
   urlsCallbacks.push(function(urls) {
     d3.selectAll('#urls button.btn-success').on('click', function() {
       \$.ajax({url: "/vote/" + this.__data__.id + "/up", type: 'POST', success: function(result){
-          updateurls(result);
       }});
     });
     d3.selectAll('#urls button.btn-danger').on('click', function() {
       \$.ajax({url: "/vote/" + this.__data__.id + "/down", type: 'POST', success: function(result){
-          updateurls(result);
       }});
     });
   });
   urlsCallbacks.push(function(urls) { console.log(urls); });
 #{d3Pull "/" "urls"}
+#{d3Events "/updates" "urls"}

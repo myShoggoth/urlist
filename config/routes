@@ -8,3 +8,5 @@
 
 /vote/#UrlId/up VoteUpR POST
 /vote/#UrlId/down VoteDownR POST
+
+/updates UpdatesR GET
