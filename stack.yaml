@@ -6,6 +6,6 @@ packages:
 - '.'
 - location:
     git: https://github.com/myShoggoth/shakespeare.git
-    commit: e0158a40e29edfdacc5a1bc9fa2b0fce98e66d8e
+    commit: 56c05657d5fdb48584cb1faf537f6891f67400c4
 extra-deps: []
 resolver: lts-2.14
