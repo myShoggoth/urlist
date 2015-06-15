@@ -1,6 +1,6 @@
 #{d3InitData "urls"}
 <.navbar .navbar-default .navbar-static-top role="navigation">
-  <.container-fluid>
+  <.container>
     <.navbar-header>
       <button .navbar-toggle data-target=".navbar-collapse" data-toggle="collapse" type="button">
         <span .sr-only>Toggle navigation
