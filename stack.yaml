@@ -9,3 +9,5 @@ packages:
     commit: 56c05657d5fdb48584cb1faf537f6891f67400c4
 extra-deps: []
 resolver: lts-2.14
+docker:
+    enable: true
