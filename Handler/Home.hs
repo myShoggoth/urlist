@@ -54,7 +54,11 @@ postHomeR = do
             ($) runDB $ do
                 urlId <- insert url
                 _ <- insert $ Vote urlId ipp
-                return ()
+                urls <- selectList [] [Desc UrlVotetotal]
+                votes <- selectList [VoteIp ==. ipp] [Asc VoteUrlId]
+                chan <- appChannel <$> getYesod
+                let json = object [ "urls" .= jsonUrls urls (map entityVal votes) ]
+                liftIO $ writeChan chan $ ServerEvent Nothing Nothing $ return $ lazyByteString $ encode json
             redirect HomeR
         _               -> return ()
     redirect HomeR
